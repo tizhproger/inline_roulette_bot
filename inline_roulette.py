@@ -1,4 +1,5 @@
 import telebot
+import re
 import random
 import threading
 from telebot.types import InlineKeyboardButton, InlineKeyboardMarkup, InlineQueryResultArticle, InputTextMessageContent
@@ -22,23 +23,9 @@ def change_roulette(msg_id):
 
 
 def username_fix(username):
-    usr_name = username.replace('\\', '')
-    usr_name = usr_name.replace("'", '')
-    usr_name = usr_name.replace('*', '')
-    usr_name = usr_name.replace('_', '')
-    usr_name = usr_name.replace('{', '')
-    usr_name = usr_name.replace('}', '')
-    usr_name = usr_name.replace('[', '')
-    usr_name = usr_name.replace(']', '')
-    usr_name = usr_name.replace('(', '')
-    usr_name = usr_name.replace(')', '')
-    usr_name = usr_name.replace('#', '')
-    usr_name = usr_name.replace('+', '')
-    usr_name = usr_name.replace('-', '')
-    usr_name = usr_name.replace('.', '')
-    usr_name = usr_name.replace('!', '')
-    usr_name = 'поставь нормальный никнейм, ' + \
-    'клоун' if len(usr_name) == 0 else usr_name
+    usr_name = re.sub(r'[<>_{}&]', '-', username)
+    usr_name = usr_name.encode(
+        'utf-8')[:11].decode('utf-8', 'ignore') if len(usr_name.encode('utf-8')) > 20 else usr_name
     return usr_name
 
 
