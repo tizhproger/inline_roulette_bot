@@ -75,16 +75,12 @@ def roulette_setup(call):
         players_inf = call.data.split('_')
         if players_inf[2] != '0' and players_inf[4] != '-':
             if players_inf[3] != '0' and players_inf[5] != '-':
-                initiator = "[" + players_inf[4] + \
-                    "](tg://user?id=" + players_inf[2] + ")"
-                opponent = "[" + players_inf[5] + \
-                    "](tg://user?id=" + players_inf[3] + ")"
+                initiator = "[" + players_inf[4] + "](tg://user?id=" + players_inf[2] + ")"
+                opponent = "[" + players_inf[5] + "](tg://user?id=" + players_inf[3] + ")"
             else:
                 usr_name = username_fix(str(call.from_user.first_name))
-                initiator = "[" + players_inf[4] + \
-                    "](tg://user?id=" + players_inf[2] + ")"
-                opponent = "[" + usr_name + \
-                    "](tg://user?id=" + str(call.from_user.id) + ")"
+                initiator = "[" + players_inf[4] + "](tg://user?id=" + players_inf[2] + ")"
+                opponent = "[" + usr_name + "](tg://user?id=" + str(call.from_user.id) + ")"
 
         if call.inline_message_id in games:
             shoot_num = games[call.inline_message_id][0]
